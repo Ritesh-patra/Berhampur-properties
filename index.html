@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berhampur Property's - Buy, Sell & List Properties</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e40af',
+                        secondary: '#0f766e',
+                        accent: '#dc2626',
+                        dark: '#1f2937',
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .font-heading {
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1e40af;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1e3a8a;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Smooth animations */
+        .fade-in {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+
+        @keyframes floating {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .pulse-effect {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+
+        .scroll-indicator {
+            animation: scrollDown 2s infinite;
+        }
+
+        @keyframes scrollDown {
+            0% {
+                transform: translateY(0);
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+        }
+
+        /* Hover effects */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(30, 64, 175, 0.15);
+        }
+
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body class="bg-white overflow-x-hidden">
+
+    <!-- Navigation -->
+    <header class="bg-white sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <i class="ri-building-2-line text-primary text-3xl"></i>
+                    <h1 class="text-2xl font-bold font-heading text-dark">Berhampur Property's</h1>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-primary font-medium transition">Home</a>
+                    <a href="#how-it-works" class="text-gray-700 hover:text-primary font-medium transition">How It
+                        Works</a>
+                    <a href="#properties" class="text-gray-700 hover:text-primary font-medium transition">Properties</a>
+                    <a href="#why-choose" class="text-gray-700 hover:text-primary font-medium transition">Why Us</a>
+                    <a href="#submit-property"
+                        class="text-gray-700 hover:text-primary font-medium transition">Contact</a>
+                </div>
+
+                <div class="flex items-center">
+                    <a href="#submit-property"
+                        class="hidden md:block bg-primary hover:bg-blue-900 text-white font-bold py-2 px-6 rounded-full transition btn-hover">List
+                        Property</a>
+                    <button id="mobileMenuBtn" class="md:hidden text-dark focus:outline-none">
+                        <i class="ri-menu-line text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden bg-white mt-4 rounded-lg shadow-lg">
+                <div class="flex flex-col py-2">
+                    <a href="#home" class="px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-primary">Home</a>
+                    <a href="#how-it-works" class="px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-primary">How It
+                        Works</a>
+                    <a href="#properties"
+                        class="px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-primary">Properties</a>
+                    <a href="#why-choose" class="px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-primary">Why Us</a>
+                    <a href="#submit-property"
+                        class="px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-primary">Contact</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="w-full overflow-hidden">
+
+        <!-- Hero Section -->
+        <section id="home"
+            class="relative bg-gradient-to-r from-primary/5 to-secondary/5 overflow-hidden py-12 md:py-24">
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div class="fade-in">
+                        <h1 class="text-4xl md:text-6xl font-bold font-heading text-dark leading-tight mb-6">
+                            Find, Sell or <span class="text-primary">List Properties</span> in Berhampur
+                        </h1>
+                        <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                            The trusted platform for property listings and real estate services. Buy, sell, or rent with
+                            confidence in Berhampur's most reliable marketplace.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="#submit-property"
+                                class="bg-primary hover:bg-blue-900 text-white font-bold py-4 px-8 rounded-lg transition btn-hover text-center">
+                                <i class="ri-arrow-right-line mr-2"></i>List Your Property
+                            </a>
+                            <a href="#properties"
+                                class="bg-white hover:bg-gray-50 text-primary border-2 border-primary font-bold py-4 px-8 rounded-lg transition btn-hover text-center">
+                                <i class="ri-search-line mr-2"></i>Explore Properties
+                            </a>
+                        </div>
+                        <div class="flex gap-6 mt-10 flex-wrap">
+                            <div>
+                                <p class="text-3xl font-bold text-primary">500+</p>
+                                <p class="text-gray-600">Properties Listed</p>
+                            </div>
+                            <div>
+                                <p class="text-3xl font-bold text-secondary">2K+</p>
+                                <p class="text-gray-600">Happy Customers</p>
+                            </div>
+                            <div>
+                                <p class="text-3xl font-bold text-accent">24/7</p>
+                                <p class="text-gray-600">Customer Support</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative fade-in" style="animation-delay: 0.2s">
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&h=500&fit=crop"
+                                alt="Premium Property" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+                        </div>
+
+                        <!-- Floating badges -->
+                        <div class="absolute -top-6 -right-6 bg-white rounded-2xl shadow-xl p-4 floating">
+                            <div class="bg-accent text-white rounded-xl p-4 text-center">
+                                <i class="ri-fire-line text-3xl mb-2"></i>
+                                <p class="font-bold text-sm">Hot Deal</p>
+                            </div>
+                        </div>
+
+                        <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-4 floating"
+                            style="animation-delay: 1s">
+                            <div class="bg-secondary text-white rounded-xl p-4 text-center">
+                                <i class="ri-verified-badge-line text-3xl mb-2"></i>
+                                <p class="font-bold text-sm">Verified</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-primary scroll-indicator">
+                <i class="ri-arrow-down-line text-3xl"></i>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold font-heading text-dark mb-4">How It Works</h2>
+                    <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Simple, transparent, and hassle-free process to
+                        list your property</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Step 1 -->
+                    <div class="card-hover bg-white rounded-2xl p-8 text-center border-2 border-gray-100">
+                        <div class="inline-flex items-center justify-center w-20 h-20 bg-primary/10 rounded-2xl mb-6">
+                            <i class="ri-edit-2-line text-primary text-4xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold font-heading text-dark mb-4">1. Submit Your Property</h3>
+                        <p class="text-gray-600 mb-6">Fill out a simple form with your property details, photos, and
+                            asking price. Takes just 5 minutes!</p>
+                        <ul class="text-left text-sm text-gray-600 space-y-2">
+                            <li class="flex items-center"><i class="ri-check-line text-primary mr-2"></i>Property
+                                details</li>
+                            <li class="flex items-center"><i class="ri-check-line text-primary mr-2"></i>Upload photos
+                            </li>
+                            <li class="flex items-center"><i class="ri-check-line text-primary mr-2"></i>Set asking
+                                price</li>
+                        </ul>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="card-hover bg-white rounded-2xl p-8 text-center border-2 border-gray-100">
+                        <div class="inline-flex items-center justify-center w-20 h-20 bg-secondary/10 rounded-2xl mb-6">
+                            <i class="ri-shield-check-line text-secondary text-4xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold font-heading text-dark mb-4">2. We Verify</h3>
+                        <p class="text-gray-600 mb-6">Our expert team carefully verifies all property details and
+                            documents to ensure quality and authenticity.</p>
+                        <ul class="text-left text-sm text-gray-600 space-y-2">
+                            <li class="flex items-center"><i class="ri-check-line text-secondary mr-2"></i>Document
+                                verification</li>
+                            <li class="flex items-center"><i class="ri-check-line text-secondary mr-2"></i>Quality check
+                            </li>
+                            <li class="flex items-center"><i class="ri-check-line text-secondary mr-2"></i>Authenticity
+                                confirmed</li>
+                        </ul>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="card-hover bg-white rounded-2xl p-8 text-center border-2 border-gray-100">
+                        <div class="inline-flex items-center justify-center w-20 h-20 bg-accent/10 rounded-2xl mb-6">
+                            <i class="ri-globe-line text-accent text-4xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold font-heading text-dark mb-4">3. We List on Website</h3>
+                        <p class="text-gray-600 mb-6">Once approved, your property is featured prominently on our
+                            website for thousands of buyers to discover.</p>
+                        <ul class="text-left text-sm text-gray-600 space-y-2">
+                            <li class="flex items-center"><i class="ri-check-line text-accent mr-2"></i>Premium listing
+                            </li>
+                            <li class="flex items-center"><i class="ri-check-line text-accent mr-2"></i>Get inquiries
+                            </li>
+                            <li class="flex items-center"><i class="ri-check-line text-accent mr-2"></i>Close deals
+                                faster</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Property Submission Form Section -->
+        <section id="submit-property" class="py-16 md:py-24 bg-gradient-to-br from-primary/5 to-secondary/5">
+            <div class="container mx-auto px-4">
+                <div class="max-w-2xl mx-auto">
+                    <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+                        <h2 class="text-3xl md:text-4xl font-bold font-heading text-dark mb-2">List Your Property</h2>
+                        <p class="text-gray-600 mb-10">Fill out the form below and we'll review your property within 24
+                            hours</p>
+
+                        <form id="propertyForm" class="space-y-6" action="form.php" method="post"
+                            enctype="multipart/form-data">
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">Owner Name *</label>
+                                    <input type="text" name="owner" required
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition"
+                                        placeholder="Your full name">
+                                </div>
+
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">Phone Number *</label>
+                                    <input type="tel" name="phone" required
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition"
+                                        placeholder="+91 XXXXX XXXXX">
+                                </div>    
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Email *</label>
+                                <input type="email" name="email" required
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition"
+                                    placeholder="yourmail@example.com">
+                            </div>
+
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">Property Type *</label>
+                                    <select name="type" required
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition bg-white">
+                                        <option value="">Select property type</option>
+                                        <option value="Flat">Flat/Apartment</option>
+                                        <option value="Plot">Plot</option>
+                                        <option value="House">House</option>
+                                        <option value="Commercial">Commercial</option>
+                                        <option value="Office">Office Space</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">Property Location *</label>
+                                    <input type="text" name="location" required
+                                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition"
+                                        placeholder="Street address">
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Price (₹) *</label>
+                                <input type="number" name="price" required
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition"
+                                    placeholder="Enter asking price">
+                            </div>
+
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Property Description *</label>
+                                <textarea name="description" required
+                                    class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary focus:outline-none transition h-32 resize-none"
+                                    placeholder="Describe your property features, amenities, etc."></textarea>
+                            </div>
+
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Upload Property Images *</label>
+
+                                <div
+                                    class="border-2 border-dashed border-primary rounded-lg p-8 text-center cursor-pointer hover:bg-primary/5 transition">
+                                    <input type="file" name="images[]" multiple accept="image/*" required class="hidden"
+                                        id="imageUpload">
+                                    <i class="ri-image-add-line text-4xl text-primary mb-3"></i>
+                                    <p class="text-gray-700 font-semibold">Click to upload or drag and drop</p>
+                                    <p class="text-sm text-gray-500">PNG, JPG, GIF up to 5MB each</p>
+                                </div>
+
+                                <div id="imagePreview" class="flex flex-wrap gap-3 mt-4"></div>
+                            </div>
+
+
+                            <div class="bg-primary/10 border border-primary rounded-lg p-4 flex items-start gap-3">
+                                <input type="checkbox" id="agreement" required class="mt-1">
+                                <label for="agreement" class="text-sm text-gray-700">I confirm that all information
+                                    provided is accurate and authentic. I agree to the terms and conditions.</label>
+                            </div>
+
+
+                            <button type="submit"
+                                class="w-full bg-primary hover:bg-blue-900 text-white font-bold py-4 rounded-lg transition btn-hover text-lg">
+                                <i class="ri-check-line mr-2"></i>Submit Property
+                            </button>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Properties Section -->
+        <section id="properties" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold font-heading text-dark mb-4">Featured Properties</h2>
+                    <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Handpicked premium properties in Berhampur</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Property Card 1 -->
+                    <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop"
+                                alt="Luxury Apartment"
+                                class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                            <div
+                                class="absolute top-4 right-4 bg-accent text-white px-4 py-2 rounded-full text-sm font-bold">
+                                Verified</div>
+                            <div
+                                class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                                <p class="text-white text-2xl font-bold">₹45 Lakhs</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-dark mb-2">Luxury Apartment</h3>
+                            <p class="text-gray-600 mb-4 flex items-center"><i
+                                    class="ri-map-pin-line mr-2 text-primary"></i>Downtown Berhampur</p>
+                            <div class="flex gap-4 mb-6 text-sm text-gray-600">
+                                <span class="flex items-center"><i class="ri-home-line mr-1 text-primary"></i>3
+                                    BHK</span>
+                                <span class="flex items-center"><i class="ri-ruler-2-line mr-1 text-primary"></i>1200
+                                    sqft</span>
+                            </div>
+                            <button
+                                class="w-full bg-primary hover:bg-blue-900 text-white font-bold py-3 rounded-lg transition">View
+                                Details</button>
+                        </div>
+                    </div>
+
+                    <!-- Property Card 2 -->
+                    <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1570129477492-45c003cedd20?w=400&h=300&fit=crop"
+                                alt="Modern House"
+                                class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                            <div
+                                class="absolute top-4 right-4 bg-accent text-white px-4 py-2 rounded-full text-sm font-bold">
+                                Hot Deal</div>
+                            <div
+                                class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                                <p class="text-white text-2xl font-bold">₹65 Lakhs</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-dark mb-2">Modern House</h3>
+                            <p class="text-gray-600 mb-4 flex items-center"><i
+                                    class="ri-map-pin-line mr-2 text-primary"></i>North Berhampur</p>
+                            <div class="flex gap-4 mb-6 text-sm text-gray-600">
+                                <span class="flex items-center"><i class="ri-home-line mr-1 text-primary"></i>4
+                                    BHK</span>
+                                <span class="flex items-center"><i class="ri-ruler-2-line mr-1 text-primary"></i>2000
+                                    sqft</span>
+                            </div>
+                            <button
+                                class="w-full bg-primary hover:bg-blue-900 text-white font-bold py-3 rounded-lg transition">View
+                                Details</button>
+                        </div>
+                    </div>
+
+                    <!-- Property Card 3 -->
+                    <div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+                        <div class="relative h-64 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=400&h=300&fit=crop"
+                                alt="Commercial Space"
+                                class="w-full h-full object-cover hover:scale-110 transition duration-500">
+                            <div
+                                class="absolute top-4 right-4 bg-accent text-white px-4 py-2 rounded-full text-sm font-bold">
+                                Premium</div>
+                            <div
+                                class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                                <p class="text-white text-2xl font-bold">₹30 Lakhs</p>
+                            </div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-dark mb-2">Commercial Space</h3>
+                            <p class="text-gray-600 mb-4 flex items-center"><i
+                                    class="ri-map-pin-line mr-2 text-primary"></i>Market Area</p>
+                            <div class="flex gap-4 mb-6 text-sm text-gray-600">
+                                <span class="flex items-center"><i
+                                        class="ri-home-line mr-1 text-primary"></i>Shop</span>
+                                <span class="flex items-center"><i class="ri-ruler-2-line mr-1 text-primary"></i>800
+                                    sqft</span>
+                            </div>
+                            <button
+                                class="w-full bg-primary hover:bg-blue-900 text-white font-bold py-3 rounded-lg transition">View
+                                Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section id="why-choose" class="py-16 md:py-24 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold font-heading text-dark mb-4">Why Choose Berhampur
+                        Property's</h2>
+                    <div class="w-24 h-1 bg-primary mx-auto mb-6"></div>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Your trusted partner in real estate</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card-hover bg-white rounded-2xl p-8 border-l-4 border-primary">
+                        <i class="ri-verified-badge-line text-4xl text-primary mb-4"></i>
+                        <h3 class="text-2xl font-bold text-dark mb-3">Trusted Service</h3>
+                        <p class="text-gray-600">All properties are verified and authenticated for complete peace of
+                            mind.</p>
+                    </div>
+
+                    <div class="card-hover bg-white rounded-2xl p-8 border-l-4 border-secondary">
+                        <i class="ri-lightning-charge-line text-4xl text-secondary mb-4"></i>
+                        <h3 class="text-2xl font-bold text-dark mb-3">Fast Listing</h3>
+                        <p class="text-gray-600">Get your property listed within 24 hours of verification.</p>
+                    </div>
+
+                    <div class="card-hover bg-white rounded-2xl p-8 border-l-4 border-accent">
+                        <i class="ri-map-2-line text-4xl text-accent mb-4"></i>
+                        <h3 class="text-2xl font-bold text-dark mb-3">Local Expertise</h3>
+                        <p class="text-gray-600">Deep knowledge of Berhampur's real estate market and neighborhoods.</p>
+                    </div>
+
+                    <div class="card-hover bg-white rounded-2xl p-8 border-l-4 border-primary">
+                        <i class="ri-shield-line text-4xl text-primary mb-4"></i>
+                        <h3 class="text-2xl font-bold text-dark mb-3">Secure Transactions</h3>
+                        <p class="text-gray-600">Safe and transparent process with complete documentation support.</p>
+                    </div>
+
+                    <div class="card-hover bg-white rounded-2xl p-8 border-l-4 border-secondary">
+                        <i class="ri-24-hours-line text-4xl text-secondary mb-4"></i>
+                        <h3 class="text-2xl font-bold text-dark mb-3">24/7 Support</h3>
+                        <p class="text-gray-600">Round-the-clock customer support for all your queries and concerns.</p>
+                    </div>
+
+                    <div class="card-hover bg-white rounded-2xl p-8 border-l-4 border-accent">
+                        <i class="ri-team-line text-4xl text-accent mb-4"></i>
+                        <h3 class="text-2xl font-bold text-dark mb-3">Expert Team</h3>
+                        <p class="text-gray-600">Experienced professionals dedicated to your success.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="py-16 md:py-24 bg-gradient-to-r from-primary to-secondary">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold font-heading text-white mb-4">Get in Touch</h2>
+                    <p class="text-white/90 text-lg">Have questions? Our team is ready to help!</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div
+                        class="bg-white/10 backdrop-blur rounded-2xl p-8 text-center text-white border border-white/20">
+                        <i class="ri-phone-line text-4xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Call Us</h3>
+                        <p>+91 XXXXX XXXXX</p>
+                    </div>
+
+                    <div
+                        class="bg-white/10 backdrop-blur rounded-2xl p-8 text-center text-white border border-white/20">
+                        <i class="ri-mail-line text-4xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Email Us</h3>
+                        <p>info@berhampur-property.com</p>
+                    </div>
+
+                    <div
+                        class="bg-white/10 backdrop-blur rounded-2xl p-8 text-center text-white border border-white/20">
+                        <i class="ri-map-pin-line text-4xl mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Visit Us</h3>
+                        <p>Downtown Berhampur, Odisha</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 flex items-center"><i
+                                class="ri-building-2-line mr-2"></i>Berhampur Property's</h3>
+                        <p class="text-gray-400">Your trusted real estate marketplace in Berhampur.</p>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#home" class="hover:text-primary">Home</a></li>
+                            <li><a href="#properties" class="hover:text-primary">Properties</a></li>
+                            <li><a href="#submit-property" class="hover:text-primary">List Property</a></li>
+                            <li><a href="#contact" class="hover:text-primary">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-bold mb-4">Information</h4>
+                        <ul class="space-y-2 text-gray-400">
+                            <li><a href="#" class="hover:text-primary">About Us</a></li>
+                            <li><a href="#" class="hover:text-primary">Privacy Policy</a></li>
+                            <li><a href="#" class="hover:text-primary">Terms & Conditions</a></li>
+                            <li><a href="#" class="hover:text-primary">FAQ</a></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 class="text-lg font-bold mb-4">Follow Us</h4>
+                        <div class="flex gap-4">
+                            <a href="#" class="bg-primary/20 hover:bg-primary p-3 rounded-full transition"><i
+                                    class="ri-facebook-line"></i></a>
+                            <a href="#" class="bg-primary/20 hover:bg-primary p-3 rounded-full transition"><i
+                                    class="ri-twitter-line"></i></a>
+                            <a href="#" class="bg-primary/20 hover:bg-primary p-3 rounded-full transition"><i
+                                    class="ri-instagram-line"></i></a>
+                            <a href="#" class="bg-primary/20 hover:bg-primary p-3 rounded-full transition"><i
+                                    class="ri-linkedin-line"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+                    <p>&copy; 2025 Berhampur Property's. All rights reserved. | Powered by Real Estate Professionals</p>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when link is clicked
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Form submission
+        const propertyForm = document.getElementById('propertyForm');
+        const imageUpload = document.getElementById('imageUpload');
+        const imagePreview = document.getElementById('imagePreview');
+
+        imageUpload.addEventListener('change', (e) => {
+            imagePreview.innerHTML = '';
+            Array.from(e.target.files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = document.createElement('img');
+                    img.src = event.target.result;
+                    img.className = 'w-20 h-20 rounded-lg object-cover';
+                    imagePreview.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            });
+        });
+
+     
+
+        // Image upload box click
+        document.querySelector('input[type="file"]').parentElement.addEventListener('click', () => {
+            imageUpload.click();
+        });
+    </script>
+
+</body>
+
+</html>
